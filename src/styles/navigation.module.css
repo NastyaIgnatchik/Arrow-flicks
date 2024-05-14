@@ -1,0 +1,29 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 20%;
+  padding: 24px;
+  flex-direction: column;
+}
+
+.navbarMain {
+  flex: 1;
+}
+
+.header {
+  margin-bottom: 80px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-size: var(--mantine-font-size-sm);
+  padding: 10px;
+  border-radius: 8px;
+}
+.active {
+  background-color: #e5d5fa;
+  color: #9854f6;
+  font-weight: 600;
+}

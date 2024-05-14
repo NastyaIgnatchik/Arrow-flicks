@@ -1,0 +1,10 @@
+.mantine-Modal-close{
+    border: none;
+}
+.mantine-Modal-header{
+    border-bottom: 1px #D5D6DC solid;
+}
+.mantine-Modal-title{
+    line-height: 22px;
+}
+

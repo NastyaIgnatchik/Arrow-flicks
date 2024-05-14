@@ -1,0 +1,15 @@
+@tailwind components;
+@tailwind utilities;
+@tailwind base;
+
+@layer base {
+  button {
+    @apply cursor-pointer;
+  }
+  a {
+    @apply cursor-pointer;
+  }
+  iframe{
+    @apply rounded-[9px]
+  }
+}
