@@ -9,7 +9,7 @@ export function MovieTrailer({ overview, productionCompanies, video }) {
   });
 
   return (
-    <div className="bg-[white] mt-[20px] p-[24px] items-center lg:items-start  flex flex-col h-[729px] w-full rounded-[12px] ">
+    <div className="bg-[white] mt-[20px] p-[24px] items-center lg:items-start pb-[60px] flex flex-col h-auto w-full rounded-[12px] ">
       <p className="leading-[20px] font-bold mb-[16px]">Trailer</p>
       <div className="w-full md:w-[80%] lg:w-[60%]">
         {video ? (
@@ -33,25 +33,31 @@ export function MovieTrailer({ overview, productionCompanies, video }) {
       <hr className="w-full my-[20px]" />
 
       <p className="leading-[20px] font-bold mb-[16px] ">Description</p>
-      <p className="font-[16px] leading-[20px] h-auto">{overview || 'not mentioned'}</p>
+      <p className="font-[16px] leading-[20px] h-auto">
+        {overview || "not mentioned"}
+      </p>
       <hr className="w-full my-[20px]" />
       <p className="leading-[20px] font-bold mb-[16px]">Production</p>
 
-      <div className="flex flex-col pb-[60px] gap-[12px]">
-        {productionCompanies?.length ? productionCompanies?.map(({ logo_path, name }) => {
-          return (
-            <div
-              key={name}
-              className="flex flex-col sm:flex-row h-auto sm:h-[40px] items-center gap-[9px]"
-            >
-                {logo_path && <img
-                    className="w-[40px]"
-                    src={`https://image.tmdb.org/t/p/w500${logo_path}`}
-                />}
-              <p className="leading-[20px] font-bold text-center">{name}</p>
-            </div>
-          );
-        }):'not mentioned'}
+      <div className="flex flex-col   gap-[12px]">
+        {productionCompanies?.length
+          ? productionCompanies?.map(({ logo_path, name }) => {
+              return (
+                <div
+                  key={name}
+                  className="flex flex-col sm:flex-row h-auto sm:h-[40px] justify-center items-center gap-[9px]"
+                >
+                  {logo_path && (
+                    <img
+                      className="w-[40px]"
+                      src={`https://image.tmdb.org/t/p/w500${logo_path}`}
+                    />
+                  )}
+                  <p className="leading-[20px] font-bold text-center">{name}</p>
+                </div>
+              );
+            })
+          : "not mentioned"}
       </div>
     </div>
   );
