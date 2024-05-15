@@ -45,7 +45,7 @@ export default function RatedMoviesComponent() {
 
   const moviesOrNotFound =
     !searchedMovies?.length && confirmSearch ? (
-      <NoRated />
+      <NoRated noHeightScreen/>
     ) : (
       <RatedMoviesPagination
         ratedMovies={confirmSearch ? searchedMovies : data}

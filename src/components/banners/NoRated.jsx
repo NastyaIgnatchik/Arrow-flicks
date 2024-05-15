@@ -3,9 +3,9 @@ import { Button } from "@mantine/core";
 import Link from "next/link";
 import NoRatedIcon from "@/components/icons/NoRatedIcon";
 
-const NotRated = () => {
+const NotRated = ({noHeightScreen}) => {
   return (
-    <div className="flex flex-col w-full h-screen mb-[-82px]  justify-center items-center gap-[16px]">
+    <div className={`flex flex-col w-full ${noHeightScreen?'mt-[55px]' : 'h-screen'} mb-[-82px]  justify-center items-center gap-[16px]`}>
       <NoRatedIcon />
       <p className="font-semibold leading-[25px]">
         You haven&apos;t rated any films yet
