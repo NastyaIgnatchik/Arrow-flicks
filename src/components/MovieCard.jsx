@@ -11,7 +11,7 @@ import { usePathname, useRouter } from "next/navigation";
 import {
   getFilmGenresById,
   getMovieFieldToProps,
-  getReleaseYear,
+  getReleaseYear, getVoteCount,
   movieRatingRoundUp,
 } from "@/helpers/functions/Functions";
 import NoPoster from "@/components/banners/NoPoster";
@@ -36,6 +36,7 @@ export function MovieCard({ getStorageData, movie }) {
   const allGenres = useSelector((state) => state.movies.genres);
   const filmGenres = getFilmGenresById(allGenres, genres)?.join(", ");
   const prevPath = pathname === "/" ? "movies" : "rated";
+  const movieVoteCount = getVoteCount(voteCount)
 
   const save = () => {
     setIsSave(true);
@@ -106,7 +107,7 @@ export function MovieCard({ getStorageData, movie }) {
               <p className="pl-[4px] font-[16px] leading-[20px] font-semibold">
                 {movieRating}
               </p>
-              <p className="pl-[8px] font-[16px] line-clamp-1 ">{`(${voteCount} m)`}</p>
+              <p className="pl-[8px] font-[16px] line-clamp-1 ">{movieVoteCount}</p>
             </div>
           </div>
 

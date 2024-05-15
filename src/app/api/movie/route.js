@@ -18,13 +18,18 @@ export async function GET(req, res) {
     const url = `${process.env.NEXT_PUBLIC_REST_API}/movie/${id}?${params}&append_to_response=videos`;
 
     const apiRes = await needle("get", `${url}`, options);
+
+    if (apiRes.statusCode !== 200) {
+      throw new Error(
+        `API request failed with status code ${apiRes.statusCode}`
+      );
+    }
     return NextResponse.json(apiRes.body);
   } catch (err) {
-    return NextResponse.json(
-      { message: "Something wrong on server" },
-      { status: 404, statusText: "Something wrong on server" }
-    );
+    return NextResponse.json({
+      error: err.message,
+    });
   }
 }
 
- export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";

@@ -5,13 +5,11 @@ export const mtbdServices = {
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_LOCAlHOST}${url}`, {
         method: "GET",
-        next: {revalidate: 10},
       });
-      console.log(res)
       const response = await res.json();
 
-      if (response.status_message) {
-        throw new Error(`${response.status_message}`);
+      if (response.error) {
+        throw new Error(response.error);
       }
       return response;
     } catch (error) {
@@ -33,14 +31,13 @@ export const mtbdServices = {
     sortBy = "popularity.desc"
   ) {
     const url = `/api/movies?page=${page}&with_genres=${genre}&primary_release_year=${releaseYear}&vote_average.lte=${voteAverageTo}&vote_average.gte=${voteAverageFrom}&sort_by=${sortBy}`;
-    const u = await this.getData(url);
-    return u
+    return await this.getData(url);
   },
 
   async getMovie(id) {
     const url = `/api/movie?id=${id}`;
-    const y = await this.getData(url);
-    console.log(y)
-    return y
+    return await this.getData(url);
   },
 };
+
+export const revalidation = 60;

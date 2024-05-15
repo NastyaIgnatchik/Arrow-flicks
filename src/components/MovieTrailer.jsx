@@ -33,7 +33,7 @@ export function MovieTrailer({ overview, productionCompanies, video }) {
       <hr className="w-full my-[20px]" />
 
       <p className="leading-[20px] font-bold mb-[16px] ">Description</p>
-      <p className="font-[16px] leading-[20px] h-auto">{overview || 'not mention'}</p>
+      <p className="font-[16px] leading-[20px] h-auto">{overview || 'not mentioned'}</p>
       <hr className="w-full my-[20px]" />
       <p className="leading-[20px] font-bold mb-[16px]">Production</p>
 
@@ -51,7 +51,7 @@ export function MovieTrailer({ overview, productionCompanies, video }) {
               <p className="leading-[20px] font-bold text-center">{name}</p>
             </div>
           );
-        }):'not mention'}
+        }):'not mentioned'}
       </div>
     </div>
   );

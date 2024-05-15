@@ -8,7 +8,6 @@ import NotFound from "@/components/banners/NotFound";
 import PageLayout from "@/app/pageLayout";
 
 export default async function Home({ searchParams }) {
-
   const currentPage = Number(searchParams?.page) || 1;
   const genre = searchParams?.with_genres;
   const releaseYear = searchParams?.primary_release_year;
@@ -36,18 +35,16 @@ export default async function Home({ searchParams }) {
   return (
     <PageLayout>
       <div className=" mt-[40px] sm:mt-0 absolute flex flex-col pb-[82px] right-0 top-0 sm:w-[80%] px-[20px] w-full  lg:px-[90px]">
-        <ErrorLoaderBoundary data={data}>
-          <>
-            <p className="text-[32px] leading-[45px] font-bold pt-[41.5px]">
-              Movies
-            </p>
-            <Suspense>
-              <Filters />
-            </Suspense>
-            {data?.length ? (
+        <p className="text-[32px] leading-[45px] font-bold pt-[41.5px]">
+          Movies
+        </p>
+        <Suspense>
+          <Filters />
+        </Suspense>
+        <ErrorLoaderBoundary data={data} banner={<NotFound />}>
               <>
                 <div className=" relative grid lg:grid-cols-2 grid-cols-1  justify-items-stretch gap-[16px] my-[24px]">
-                  {data?.map((e) => {
+                  {data?.length && data?.map((e) => {
                     return <MovieCard key={e?.id} movie={e} />;
                   })}
                 </div>
@@ -56,10 +53,6 @@ export default async function Home({ searchParams }) {
                     <MoviesPagination nextPageData={nextPageData} />
                   </Suspense>
                 </div>
-              </>
-            ) : (
-              <NotFound />
-            )}
           </>
         </ErrorLoaderBoundary>
       </div>

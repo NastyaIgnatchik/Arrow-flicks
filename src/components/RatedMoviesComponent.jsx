@@ -3,13 +3,12 @@ import { useEffect, useState } from "react";
 import { SearchMovie } from "@/components/SearchMovie";
 import { RatedMoviesPagination } from "@/components/paginations/RatedMoviesPagination";
 import NoRated from "@/components/banners/NoRated";
-import { MovieLoader } from "@/components/MovieLoader";
+import ErrorLoaderBoundary from "@/hocs/ErrorLoaderBoundary";
 
 export default function RatedMoviesComponent() {
   const [searchValue, setSearchValue] = useState("");
   const [data, setData] = useState([]);
   const [confirmSearch, setConfirmSearch] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
 
   function getStorageData() {
     if (window.localStorage) {
@@ -31,10 +30,6 @@ export default function RatedMoviesComponent() {
     }
   }
 
-
-
-
-
   const searchedMovies = data?.filter(({ movie }) => {
     return movie?.title?.toLowerCase().includes(searchValue.toLowerCase());
   });
@@ -44,35 +39,22 @@ export default function RatedMoviesComponent() {
     setConfirmSearch(false);
   };
 
-  const setLoadingTimeout = () => {
-    if (!data) {
-      setIsLoading(true);
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 3000);
-    }
-  };
-
   useEffect(() => {
     getStorageData();
   }, []);
 
-  useEffect(() => {
-    if (data) {
-      setIsLoading(false);
-    } else setLoadingTimeout();
-  }, [data]);
-
-  const loaderOrNotFound = isLoading ? <MovieLoader /> :  <NoRated />;
-
-  const moviesOrNotFound = !searchedMovies?.length && confirmSearch ? <NoRated /> : <RatedMoviesPagination
-      ratedMovies={confirmSearch ? searchedMovies : data}
-      getStorageData={getStorageData}
-  />
+  const moviesOrNotFound =
+    !searchedMovies?.length && confirmSearch ? (
+      <NoRated />
+    ) : (
+      <RatedMoviesPagination
+        ratedMovies={confirmSearch ? searchedMovies : data}
+        getStorageData={getStorageData}
+      />
+    );
 
   return (
-    <>
-      {data?.length ? (
+      <ErrorLoaderBoundary data={data} banner={<NoRated />}>
         <>
           <div className="flex sm:flex-row flex-col pt-[41.5px] justify-between">
             <p className="text-[32px] leading-[45px] font-bold pb-[16px] sm:pb-0">
@@ -86,11 +68,8 @@ export default function RatedMoviesComponent() {
           </div>
           {moviesOrNotFound}
         </>
-      ) : (
-        loaderOrNotFound
-      )}
-    </>
+      </ErrorLoaderBoundary>
   );
 }
 
-export const dynamicParams = false
+export const dynamicParams = false;

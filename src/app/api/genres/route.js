@@ -14,9 +14,8 @@ export async function GET(req, res) {
 
     return NextResponse.json(apiRes.body);
   } catch (err) {
-    return NextResponse.json(
-      { message: "Something wrong on server" },
-      { status: 404, statusText: "Something wrong on server" }
-    );
+    return NextResponse.json({
+      error: err.message,
+    });
   }
 }

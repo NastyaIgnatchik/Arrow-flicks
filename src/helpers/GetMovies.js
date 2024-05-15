@@ -9,6 +9,7 @@ export const getMovies = async (
   sortBy
 ) => {
   try {
+
     const response = await mtbdServices.getMovies(
       page,
       genre,
@@ -17,11 +18,8 @@ export const getMovies = async (
       voteAverageTo,
       sortBy
     );
-    if (!response) {
-      throw new Error("no response");
-    }
     return response?.results;
   } catch (e) {
-    return e;
+    return {message:e.message};
   }
 };

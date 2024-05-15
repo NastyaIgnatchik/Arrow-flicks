@@ -4,7 +4,7 @@ import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/post
 
 export async function GET(req, res) {
   try {
-    const { searchParams } =  new URL(req.url);
+    const { searchParams } = new URL(req.url);
     const options = {
       headers: { Authorization: "Bearer " + process.env.NEXT_PUBLIC_TOKEN },
     };
@@ -19,11 +19,17 @@ export async function GET(req, res) {
 
     const apiRes = await needle("get", `${url}`, options);
 
+    if (apiRes.statusCode !== 200) {
+      throw new Error(
+        `API request failed with status code ${apiRes.statusCode}`
+      );
+    }
+
     return NextResponse.json(apiRes.body);
   } catch (err) {
-    return NextResponse.json(
-      err
-    );
+    return NextResponse.json({
+      error: err.message,
+    });
   }
 }
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";

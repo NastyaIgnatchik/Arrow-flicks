@@ -17,14 +17,12 @@ export const getGenresList = (genres) =>
   genres?.map(({ name }) => {
     return name;
   });
-export const getYearsArray = Array.from(
-  { length: 2024 - 1970 + 1 },
-  (_, i) => (1970 + i).toString()
+export const getYearsArray = Array.from({ length: 2024 - 1970 + 1 }, (_, i) =>
+  (1970 + i).toString()
 );
 
-export const getRatingNumberArray = Array.from(
-  { length: 10 - 0 + 1 },
-  (_, i) => (0 + i).toString()
+export const getRatingNumberArray = Array.from({ length: 10 - 0 + 1 }, (_, i) =>
+  (0 + i).toString()
 );
 
 export const getMovieFieldToProps = (e) => {
@@ -72,8 +70,11 @@ export const getMinHourTimeFromMinutes = (value) => {
   const minutes = value % 60;
   const renderHour = hours ? `${hours}h` : null;
   const renderMinutes = minutes ? `${minutes}m` : null;
-  const renderDuration = renderHour || renderMinutes ? `${renderHour} ${renderMinutes}` : 'not mention';
-  return renderDuration
+  const renderedDuration =
+    renderHour || renderMinutes
+      ? `${renderHour} ${renderMinutes}`
+      : "not mentioned";
+  return renderedDuration;
 };
 
 export const getFormattedDate = (date) => {
@@ -85,12 +86,16 @@ export const getFormattedDate = (date) => {
   if (monthNumber && monthNumber >= 1 && monthNumber <= 12) {
     monthName = months[monthNumber - 1];
   }
-  return `${monthName} ${day}, ${year}`;
+  const renderedDate =
+    monthName && day && year ? `${monthName} ${day}, ${year}` : "not mentioned";
+  return renderedDate;
 };
+
 export const getMoneyString = (value) => {
   const reg = /\B(?=(\d{3})+(?!\d))/g;
   const str = value?.toString();
-  const renderStr = str === "0" ? "not mention" : `$${str?.replace(reg, ",")}`;
+  const renderStr =
+    str === "0" || !str ? "not mentioned" : `$${str?.replace(reg, ",")}`;
   return renderStr;
 };
 
@@ -99,4 +104,17 @@ export const movieRatingRoundUp = (value) => {
     return value?.toFixed(1);
   }
   return "0";
+};
+
+export const getVoteCount = (value) => {
+  if (!value) {
+    return "";
+  } else {
+    if (value >= 1000) {
+      const number = value / 1000;
+      const millions = number.toFixed(1);
+      return `(${millions} m)`;
+    }
+    return `(${value} k)`;
+  }
 };

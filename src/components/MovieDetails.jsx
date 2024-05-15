@@ -7,7 +7,7 @@ import {
   getGenresList,
   getMinHourTimeFromMinutes,
   getMoneyString,
-  getReleaseYear,
+  getReleaseYear, getVoteCount,
   movieRatingRoundUp,
 } from "@/helpers/functions/Functions";
 import NoPoster from "@/components/banners/NoPoster";
@@ -24,6 +24,8 @@ export function MovieDetails({ dataAboutMovie }) {
   const movieRating = movieRatingRoundUp(dataAboutMovie?.average);
 
   const genresList = getGenresList(dataAboutMovie?.genres)?.join(", ");
+
+  const movieVoteCount = getVoteCount(dataAboutMovie?.voteCount)
 
   const movieParams = [
     { label: "Duration", value: duration },
@@ -81,7 +83,7 @@ export function MovieDetails({ dataAboutMovie }) {
               <p className="pl-[4px] font-[16px] leading-[20px] font-semibold">
                 {movieRating}
               </p>
-              <p className="pl-[8px] font-[16px] ">{`(${dataAboutMovie?.voteCount} m)`}</p>
+              <p className="pl-[8px] font-[16px] ">{movieVoteCount}</p>
             </div>
           </div>
 
@@ -96,7 +98,7 @@ export function MovieDetails({ dataAboutMovie }) {
                     {label}
                   </p>
                   <p className="font-[16px] leading-[20px]  text-wrap ">
-                    {value ? value : "not mention"}
+                    {value ? value : "not mentioned"}
                   </p>
                 </div>
               );
