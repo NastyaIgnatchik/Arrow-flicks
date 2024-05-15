@@ -68,8 +68,8 @@ export const getDataAboutMovieToProps = (movie) => {
 export const getMinHourTimeFromMinutes = (value) => {
   const hours = Math.floor(value / 60);
   const minutes = value % 60;
-  const renderHour = hours ? `${hours}h` : null;
-  const renderMinutes = minutes ? `${minutes}m` : null;
+  const renderHour = hours ? `${hours}h` : '';
+  const renderMinutes = minutes ? `${minutes}m` : '';
   const renderedDuration =
     renderHour || renderMinutes
       ? `${renderHour} ${renderMinutes}`
