@@ -70,7 +70,7 @@ export function MovieCard({ getStorageData, movie }) {
         className=" flex sm:flex-row w-full flex-col sm:items-start items-center"
       >
         {img ? (
-          <div className=" relative h-[170px] w-[119px] mr-[16px] flex-shrink-0">
+          <div className=" mt-[30px] sm:mt-[0] relative h-[250px] w-[175px] sm:h-[170px] sm:w-[119px] mr-[16px] flex-shrink-0">
             <Image
               src={`https://image.tmdb.org/t/p/w500${img}`}
               fill

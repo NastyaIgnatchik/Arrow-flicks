@@ -47,7 +47,7 @@ export function MovieDetails({ dataAboutMovie }) {
     <div className="bg-[white] p-[24px] flex flex-row h-auto w-full   rounded-[12px] justify-between">
       <div className=" flex  flex-col items-center lg:items-start lg:flex-row w-full ">
         {dataAboutMovie?.img ? (
-          <div className=" relative h-[352px] w-[200px] sm:w-[250px] mr-[16px]">
+          <div className=" relative sm:h-[352px] h-[300px] w-[200px] sm:w-[250px] mr-[16px]">
             <Image
               src={`https://image.tmdb.org/t/p/w500${dataAboutMovie?.img}`}
               fill
@@ -62,7 +62,7 @@ export function MovieDetails({ dataAboutMovie }) {
         )}
         <div className="flex flex-col lg:h-[100%] sm:justify-between w-full lg:w-[70%] ">
           <div className="flex flex-col gap-[8px] ">
-            <div className="flex flex-row items-center justify-between mt-[16px] sm:mt-0">
+            <div className="flex flex-row items-center justify-between mt-[16px] lg:mt-0">
               <p className="text-textColor font-semibold font-[24px] ">
                 {dataAboutMovie?.title}
               </p>
@@ -92,7 +92,7 @@ export function MovieDetails({ dataAboutMovie }) {
               return (
                 <div
                   key={label}
-                  className="flex  flex-row justify-between sm:justify-start"
+                  className="flex flex-col sm:flex-row justify-between sm:justify-start"
                 >
                   <p className="text-paleTextColor font-[16px] leading-[20px]  w-[33%] text-wrap">
                     {label}
