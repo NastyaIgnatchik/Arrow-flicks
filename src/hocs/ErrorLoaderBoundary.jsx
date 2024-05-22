@@ -1,9 +1,12 @@
 "use client";
 import { MovieLoader } from "@/components/MovieLoader";
 import { useEffect, useState } from "react";
+import {getAllGenres} from "@/lib/actions/movies";
+import {useDispatch} from "react-redux";
 
 export default function ErrorLoaderBoundary({ children, data, banner }) {
   const [isLoading, setIsLoading] = useState(true);
+  const dispatch = useDispatch();
 
   const errorStringMessage = (value) => (
     <div className=" pt-[55px] w-full flex justify-center items-center">
@@ -42,6 +45,10 @@ export default function ErrorLoaderBoundary({ children, data, banner }) {
       setIsLoading(false);
     } else setLoadingTimeout();
   }, [data]);
+
+  useEffect(() => {
+    dispatch(getAllGenres());
+  }, []);
 
   return <>{loader || error || children}</>;
 }

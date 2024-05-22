@@ -15,6 +15,10 @@ export async function GET(req, res) {
     const voteAverageTo = searchParams.get("vote_average.lte") || "10";
     const sortBy = searchParams.get("sort_by") || "popularity.desc";
 
+    if(voteAverageFrom!=='0'&& voteAverageTo!=='10'&& voteAverageFrom>voteAverageTo){
+      NextResponse.json([]);
+    }
+
     const url = `${process.env.NEXT_PUBLIC_REST_API}/discover/movie?language=en-US&page=${page}&with_genres=${genre}&primary_release_year=${releaseYear}&vote_average.lte=${voteAverageTo}&vote_average.gte=${voteAverageFrom}&sort_by=${sortBy}`;
 
     const apiRes = await needle("get", `${url}`, options);

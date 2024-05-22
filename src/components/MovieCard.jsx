@@ -15,15 +15,13 @@ import {
   movieRatingRoundUp,
 } from "@/helpers/functions/Functions";
 import NoPoster from "@/components/banners/NoPoster";
-import { getAllGenres } from "@/lib/actions/movies";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 export function MovieCard({ getStorageData, movie }) {
   const { id, title, voteAverage, voteCount, release, genres, img } =
     getMovieFieldToProps(movie);
 
   const router = useRouter();
-  const dispatch = useDispatch();
   const pathname = usePathname();
 
   const [opened, { open, close }] = useDisclosure(false);
@@ -48,10 +46,6 @@ export function MovieCard({ getStorageData, movie }) {
     value = JSON.parse(localStorage.getItem(`${id}`));
     setSavedMovieEstimate(value?.average);
   }, [savedMovieEstimate]);
-
-  useEffect(() => {
-    dispatch(getAllGenres());
-  }, []);
 
   return (
     <div className=" relative cursor-pointer bg-[white] p-[24px] flex flex-row sm:h-[218px] min-h-[400px] h-auto sm:min-h-0  w-full rounded-[12px] justify-between">
